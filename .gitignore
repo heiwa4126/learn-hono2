@@ -1,2 +1,7 @@
 # deps
 node_modules/
+
+# Playwright specific
+/test-results/
+/playwright-report/
+/playwright/.cache/
