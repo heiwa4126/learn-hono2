@@ -26,6 +26,10 @@ Bun で Playwright のテスト。
 bun run test:e2e
 ```
 
-## TODO
+## 普通のテスト
 
-E2E でない普通のテスト by Bun
+```sh
+bun test
+```
+
+Hono の testClient() の使い方サンプル。

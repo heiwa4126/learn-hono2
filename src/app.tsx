@@ -23,19 +23,16 @@ const View = () => {
 };
 
 const routes = app
-	.get("/", (c) => {
-		return c.html(<View />);
-	})
-	.get("/download", async (c) => {
+	.get("/", (c) => c.html(<View />))
+	.get("/search", (c) => c.json({ hello: "world" }))
+	.get("/download", (c) => {
 		const now = DateTime.local();
 		const csvFileName = `test1-${dtStrFile(now)}.csv`;
 		c.header("Content-Type", "text/csv");
 		c.header("Content-Encoding", "UTF-8");
 		c.header("Content-Disposition", `attachment; filename="${csvFileName}"`);
-
 		return c.body(`filename,created_at\n${csvFileName},${dtStr(now)}\n`);
-	})
-	.get("/search", (c) => c.json({ hello: "world" }));
+	});
 
 export type AppType = typeof routes;
 export default app;
