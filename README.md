@@ -1,6 +1,6 @@
 # learn-hono2
 
-Bun を使ってみる
+Bun で Hono と Playwright やってみる。
 
 To install dependencies:
 
@@ -14,4 +14,18 @@ To run:
 bun run dev
 ```
 
-open http://localhost:3000
+open <http://localhost:3000>
+
+## Playwright で E2E テスト
+
+「リンクをクリックするとファイルをダウンロード」のテストのサンプルコード
+兼
+Bun で Playwright のテスト。
+
+```sh
+bun run test:e2e
+```
+
+## TODO
+
+E2E でない普通のテスト by Bun

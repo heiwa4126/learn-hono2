@@ -1,7 +1,7 @@
-import { expect, test } from "@playwright/test";
+import { type Response, expect, test } from "@playwright/test";
 
 test.beforeEach(async ({ page }) => {
-	await page.goto(""); // use.baseURL in playwright.config.ts
+	await page.goto(""); // see use.baseURL in playwright.config.ts
 	await page.waitForLoadState("load");
 });
 
@@ -10,30 +10,46 @@ test("has title", async ({ page }) => {
 	await expect(page).toHaveTitle("Hello Hono!");
 });
 
-test("CSV Download", async ({ page }) => {});
+// ファイルのダウンロードとヘッダを得るためのサンプルコード
+test("CSV download", async ({ page, context }) => {
+	// レスポンスを監視するためのリスナーを設定
+	let responsePromise: Promise<Response> | undefined;
+	context.on("response", (response) => {
+		if (response.url().includes("/download")) {
+			// ↑ set your download url pattern here
+			responsePromise = Promise.resolve(response);
+		}
+	});
 
-// async function expectCounterValue(
-// 	button: Locator,
-// 	expectedCount: number,
-// 	timeout = 1000,
-// ) {
-// 	await expect(async () => {
-// 		const text = await button.textContent();
-// 		// console.log(text);
-// 		expect(text).toBe(`count is ${expectedCount}`);
-// 	}).toPass({ timeout });
-// }
+	// ダウンロードを待機するPromiseを作成
+	const downloadPromise = page.waitForEvent("download");
 
-// test("click counter", async ({ page }) => {
-// 	const btn1 = page.getByRole("button", { name: "count is" });
+	await page.getByRole("link", { name: "click here" }).click();
 
-// 	expect(btn1).toHaveText("count is 0");
+	// ダウンロードイベントとレスポンスを待機
+	const [download, response] = await Promise.all([
+		downloadPromise,
+		responsePromise,
+	]);
 
-// 	// await btn1.click();
-// 	// expect(btn1).toHaveText("count is 1");
+	// Content-Disposition ヘッダを取得
+	// ex) 'Content-Disposition: attachment; filename="foo.csv"'
+	const contentDisposition = response?.headers()["content-disposition"];
+	// console.log({ response });
 
-// 	for (let i = 1; i <= 10; i++) {
-// 		await btn1.click();
-// 		await expectCounterValue(btn1, i);
-// 	}
-// });
+	// ファイル名を抽出
+	let filename = "unknown";
+	if (contentDisposition) {
+		const matches = /filename="?(.+)"?/i.exec(contentDisposition);
+		if (matches?.[1]) {
+			filename = matches[1].replace(/['"]/g, "");
+		}
+	}
+
+	console.log(`Downloaded filename: ${filename}`);
+	// TODO: check filename pattern here
+	// expect(filename).toBe("expected_filename.ext");
+
+	// (必要に応じて) ダウンロードしたファイルを保存
+	await download.saveAs(`./tmp/${filename}`);
+});

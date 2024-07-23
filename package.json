@@ -4,7 +4,9 @@
 		"dev": "bun run --hot src/index.ts",
 		"format": "biome format --write .",
 		"lint": "biome lint .",
-		"check": "biome check --apply ."
+		"check": "biome check --apply .",
+		"test:e2e": "playwright test",
+		"test:e2e:show-report": "playwright show-report"
 	},
 	"dependencies": {
 		"hono": "^4.5.1",
