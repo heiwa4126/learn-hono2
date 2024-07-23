@@ -1,9 +1,15 @@
+# learn-hono2
+
+Bun を使ってみる
+
 To install dependencies:
+
 ```sh
 bun install
 ```
 
 To run:
+
 ```sh
 bun run dev
 ```
