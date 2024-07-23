@@ -37,4 +37,6 @@ app.get("/download", async (c) => {
 	return c.body(`filename,created_at\n${csvFileName},${dtStr(now)}\n`);
 });
 
+app.get("/search", (c) => c.json({ hello: "world" }));
+
 export default app;
