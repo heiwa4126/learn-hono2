@@ -27,10 +27,7 @@ test("CSV download", async ({ page, context }) => {
 	await page.getByRole("link", { name: "click here" }).click();
 
 	// ダウンロードイベントとレスポンスを待機
-	const [download, response] = await Promise.all([
-		downloadPromise,
-		responsePromise,
-	]);
+	const [download, response] = await Promise.all([downloadPromise, responsePromise]);
 
 	// Content-Disposition ヘッダを取得
 	// ex) 'Content-Disposition: attachment; filename="foo.csv"'

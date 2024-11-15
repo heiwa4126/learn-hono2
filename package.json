@@ -2,21 +2,20 @@
 	"name": "hono2",
 	"scripts": {
 		"dev": "bun run --hot src/index.ts",
-		"format": "biome format --write .",
-		"lint": "biome lint .",
-		"check": "biome check --apply .",
+		"format": "biome format --write . && dprint fmt",
+		"check": "biome check --write . && dprint check",
 		"test:e2e": "playwright test",
 		"test:e2e:show-report": "playwright show-report"
 	},
 	"dependencies": {
-		"hono": "^4.5.1",
-		"luxon": "^3.4.4"
+		"hono": "^4.6.10",
+		"luxon": "^3.5.0"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^1.8.3",
-		"@playwright/test": "^1.45.3",
+		"@biomejs/biome": "^1.9.4",
+		"@playwright/test": "^1.48.2",
 		"@types/bun": "latest",
 		"@types/luxon": "^3.4.2",
-		"@types/node": "^20.14.11"
+		"@types/node": "^20.17.6"
 	}
 }
