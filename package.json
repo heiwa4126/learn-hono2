@@ -8,14 +8,14 @@
 		"test:e2e:show-report": "playwright show-report"
 	},
 	"dependencies": {
-		"hono": "^4.6.10",
-		"luxon": "^3.5.0"
+		"hono": "^4.10.6",
+		"luxon": "^3.7.2"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "^1.9.4",
-		"@playwright/test": "^1.48.2",
+		"@playwright/test": "^1.56.1",
 		"@types/bun": "latest",
-		"@types/luxon": "^3.4.2",
-		"@types/node": "^20.17.6"
+		"@types/luxon": "^3.7.1",
+		"@types/node": "^20.19.25"
 	}
 }
