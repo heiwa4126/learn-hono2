@@ -16,6 +16,6 @@
 		"@playwright/test": "^1.56.1",
 		"@types/bun": "latest",
 		"@types/luxon": "^3.7.1",
-		"@types/node": "^20.19.25"
+		"@types/node": "^24.10.1"
 	}
 }
