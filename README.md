@@ -23,6 +23,7 @@ open <http://localhost:3000>
 Bun で Playwright のテスト。
 
 ```sh
+bun playwright install chromium  # とりあえず Chrome だけで始めてみる
 bun run test:e2e
 ```
 
